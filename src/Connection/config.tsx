@@ -3,6 +3,6 @@
 const config = {
   url: 'http://localhost:8888',
   graphqlUrl: 'http://localhost:8888/graphql',
-}
+};
 
 export default config;
