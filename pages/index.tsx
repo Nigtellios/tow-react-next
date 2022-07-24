@@ -2,22 +2,32 @@ import client from "../src/Connection/apollo-client";
 import {HeaderQuery} from "../src/Queries/Header";
 
 export async function getServerSideProps() {
-    const { data } = await client.query({
-        query: HeaderQuery,
+  try {
+    const {data} = await client.query({
+      query: HeaderQuery,
     });
 
-  return {
-    props: {
-      headerData: [data?.header],
-    },
-  };
+    return {
+      props: {
+        headerData: [data?.header],
+      },
+    };
+  } catch (error) {
+    let errorMessage: string = "";
+
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+
+    throw new Error(errorMessage);
+  }
 }
 
 type HeaderProps = {
   [key: string]: any;
 }
 
-const Home = ( {headerData}: {headerData: Array<object>} ) => {
+const Home = ({headerData}: { headerData: Array<object> }) => {
   return (
     <div>
       {headerData.map((header: HeaderProps) => (
