@@ -1,15 +1,21 @@
-import React from "react";
-import styled from "styled-components";
-import rem from "../../Global/utils/PxToRem";
-import media from "../../Global/utils/MediaQueries";
-import colors from "../../Global/styles/Colors";
-import transitions from "../../Global/styles/Transitions";
+import React from 'react';
+import styled from 'styled-components';
+import rem from '../../Global/utils/PxToRem';
+import media from '../../Global/utils/MediaQueries';
+import colors from '../../Global/styles/Colors';
+import transitions from '../../Global/styles/Transitions';
 
-function Header( { logotype, logotypeAlt }: { logotype: string, logotypeAlt: string } ) {
+function Header({
+  logotype,
+  logotypeAlt,
+}: {
+  logotype: string;
+  logotypeAlt: string;
+}) {
   return (
     <HeaderWrapper>
       <Logotype>
-        <img src={ logotype } alt={ logotypeAlt } loading={`lazy`}/>
+        <img src={logotype} alt={logotypeAlt} loading="lazy" />
       </Logotype>
     </HeaderWrapper>
   );
@@ -27,16 +33,16 @@ const HeaderWrapper = styled.header`
   ${media.min('lg')} {
     padding: ${rem(25)};
   }
-  
+
   &:before {
     content: '';
     bottom: 0;
     left: 0;
     position: absolute;
-    height: ${ rem(3) };
+    height: ${rem(3)};
     width: 0;
-    background: ${ colors.dark };
-	  transition: ${ transitions.long };
+    background: ${colors.dark};
+    transition: ${transitions.long};
   }
 
   &:hover:before {
@@ -46,10 +52,10 @@ const HeaderWrapper = styled.header`
 
 const Logotype = styled.div`
   display: block;
-  
+
   img {
     width: 100%;
-    max-width: ${ rem(105) };
+    max-width: ${rem(105)};
   }
 `;
 
