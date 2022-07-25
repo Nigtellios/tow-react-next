@@ -1,11 +1,11 @@
 import React from 'react';
 import client from '../src/Connection/apollo-client';
-import { HeaderQuery } from '../src/Queries/Header';
+import { HeaderQueryDocument } from '../graphql/generated/schema';
 
 export async function getServerSideProps() {
   try {
     const { data } = await client.query({
-      query: HeaderQuery,
+      query: HeaderQueryDocument,
     });
 
     return {
