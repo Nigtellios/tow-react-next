@@ -1,11 +1,16 @@
 import React from 'react';
+import { NextPage } from 'next';
+import {
+  HeaderQueryQuery,
+  HeaderQueryQueryVariables,
+} from '../graphql/generated/schema';
 import client from '../src/Connection/apollo-client';
-import { HeaderQueryDocument } from '../graphql/generated/schema';
+import headerQuery from '../src/Components/Header/headerQuery';
 
 export async function getServerSideProps() {
   try {
     const { data } = await client.query({
-      query: HeaderQueryDocument,
+      query: headerQuery,
     });
 
     return {
@@ -24,18 +29,20 @@ export async function getServerSideProps() {
   }
 }
 
-type HeaderProps = {
-  [key: string]: any;
-};
+// type HeaderProps = {
+//   [key: string]: any;
+// };
 
-function Home({ headerData }: { headerData: Array<object> }) {
-  return (
-    <div>
-      {headerData.map((header: HeaderProps) => (
-        <h1>{header.data.attributes.logotype.data.attributes.url}</h1>
-      ))}
-    </div>
-  );
-}
+const Home: NextPage<{ data: HeaderQueryQuery }> = ({
+  headerData,
+}: {
+  headerData: HeaderQueryQueryVariables;
+}) => (
+  <div>
+    {headerData.map((header) => (
+      <h1>{header.data.attributes.logotype.data.attributes.url}</h1>
+    ))}
+  </div>
+);
 
 export default Home;
